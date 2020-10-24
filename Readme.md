@@ -1,0 +1,1 @@
+mklink /D "C:\Program Files (x86)\Forex.com CA\MQL4\Indicators\trade-strategy" "C:\Projects\Jason\FOREX-WORKING\trade-strategy"
