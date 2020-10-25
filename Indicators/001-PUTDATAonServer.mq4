@@ -12,13 +12,35 @@
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
 
+
+
 //--- #include "Jason-Include/pushdatatoapi.mqh"
+//---
+
+#include "Jason-Include/hash.mqh"
+#include "Jason-Include/json.mqh"
+
+
+   
+string s = "{ \"firstName\": \"John\", \"lastName\": \"Smith\", \"age\": 25, "+
+"\"address\": { \"streetAddress\": \"21 2nd Street\", \"city\": \"New York\", \"state\": \"NY\", \"postalCode\": \"10021\" },"+
+" \"phoneNumber\": [ { \"type\": \"home\", \"number\": \"212 555-1234\" }, { \"type\": \"fax\", \"number\": \"646 555-4567\" } ],"+
+" \"gender\":{ \"type\":\"male\" }  }";
+
+   JSONParser *parser = new JSONParser();
+
+    JSONValue *jv = parser.parse(s);
+
+
 
 string   TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
 
+double OPEN, LOW, CLOSE, HIGH = 0.0;
+
 
 datetime DateTIME = iTime(Symbol(),Period(),0);
+datetime TIME_VAL = iTime(Symbol(),Period(),1);
  
 int OnCalculate(const int rates_total,
                 const int prev_calculated,
@@ -31,14 +53,48 @@ int OnCalculate(const int rates_total,
                 const long &volume[],
                 const int &spread[])
   {
-      if(DateTIME!=iTime(Symbol(),Period(),0)) // new candle on D1
+  
+   
+    
+     //---     Print("PARSED:"+jv.toString());
+     
+     
+
+     
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      if(DateTIME!=iTime(Symbol(),Period(),0))
      {
-      //Do Something...
-      DateTIME=iTime(Symbol(),Period(),0);    // overwrite old with new value
-      Print(" TimeFRAME ", TIMEFRAME,
-            " SYMBOL ", SYMBOL,
-            " DateTIME ", DateTIME
-                   );
+      
+      
+      
+      DateTIME=iTime(Symbol(),Period(),0);   
+      TIME_VAL = iTime(Symbol(),Period(),1);
+      OPEN     = open[1];
+      LOW      = low[1];
+      CLOSE    = close[1];
+      HIGH     = high[1];
+      
+      
+   //---   Print(" TimeFRAME ", TIMEFRAME,
+   //---         " SYMBOL ", SYMBOL,
+   //---         " DateTIME ", DateTIME
+   //---                );
+                   
+   //---   Print(" HIGH1 ", high[1],
+   //---         " SYMBOL ", SYMBOL,
+   //---         " DateTIME ", DateTIME
+   //---                );
      }
      return(rates_total);
   }
