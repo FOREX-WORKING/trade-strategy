@@ -9,6 +9,7 @@
 #property strict
 //--- input parameters
 input int      Input1=1;
+int    tick = 0;
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
 //+------------------------------------------------------------------+
@@ -35,7 +36,10 @@ void OnDeinit(const int reason)
 void OnTick()
   {
 //---
-   
+   tick +=1;
+   Print("Ticking");
+   Print(iTime(Symbol(),PERIOD_H1,0));
+   Print( tick );
   }
 //+------------------------------------------------------------------+
 //| Timer function                                                   |

@@ -2,7 +2,7 @@
 id=131975485677370010
 symbol=EURUSD
 period=60
-leftpos=3003
+leftpos=4671
 offline=1
 digits=5
 scale=1
@@ -42,6 +42,21 @@ height=100
 fixed_height=0
 <indicator>
 name=main
+</indicator>
+<indicator>
+name=Custom Indicator
+<expert>
+name=Jason-Indicator\001
+flags=339
+window_num=0
+</expert>
+shift_0=0
+draw_0=0
+color_0=4294967295
+style_0=0
+weight_0=0
+period_flags=0
+show_data=1
 </indicator>
 </window>
 </chart>
