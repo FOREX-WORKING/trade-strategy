@@ -31,9 +31,9 @@ string s = "{ \"firstName\": \"John\", \"lastName\": \"Smith\", \"age\": 25, "+
 
     JSONValue *jv = parser.parse(s);
 
+  
 
-
-string   TIMEFRAME   = "";
+string TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
 
 double OPEN, LOW, CLOSE, HIGH = 0.0;
