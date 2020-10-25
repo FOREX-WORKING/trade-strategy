@@ -8,6 +8,10 @@
 #property strict
 
 bool  pushdatatoapi(){
+   Print(" TimeFRAME ", TIMEFRAME,
+            " SYMBOL ", SYMBOL,
+            " DateTIME ", DateTIME
+            );
 
 return false;
 }

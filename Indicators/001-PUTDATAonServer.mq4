@@ -12,7 +12,7 @@
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
 
-#include "Jason-Include/pushdatatoapi.mqh"
+//--- #include "Jason-Include/pushdatatoapi.mqh"
 
 string   TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
@@ -38,8 +38,7 @@ int OnCalculate(const int rates_total,
       Print(" TimeFRAME ", TIMEFRAME,
             " SYMBOL ", SYMBOL,
             " DateTIME ", DateTIME
-            
-              );
+                   );
      }
      return(rates_total);
   }
