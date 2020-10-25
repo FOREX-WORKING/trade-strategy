@@ -1,9 +1,8 @@
 <chart>
-id=131975485677370010
+id=132481157573212984
 symbol=EURUSD
 period=60
-leftpos=4671
-offline=1
+leftpos=0
 digits=5
 scale=1
 graph=1
@@ -20,11 +19,11 @@ days=0
 descriptions=0
 shift_size=20
 fixed_pos=0
-window_left=0
-window_top=0
-window_right=864
-window_bottom=357
-window_type=3
+window_left=32
+window_top=32
+window_right=1900
+window_bottom=424
+window_type=1
 background_color=0
 foreground_color=16777215
 barup_color=65280
@@ -46,13 +45,13 @@ name=main
 <indicator>
 name=Custom Indicator
 <expert>
-name=Jason-Indicator\001
+name=Jason-Indicator\001-PUTDATAonServer
 flags=339
 window_num=0
 </expert>
 shift_0=0
 draw_0=0
-color_0=4294967295
+color_0=0
 style_0=0
 weight_0=0
 period_flags=0

@@ -11,16 +11,13 @@
 //+------------------------------------------------------------------+
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
-int OnInit()
-  {
-//--- indicator buffers mapping
-   
-//---
-   return(INIT_SUCCEEDED);
-  }
-//+------------------------------------------------------------------+
-//| Custom indicator iteration function                              |
-//+------------------------------------------------------------------+
+
+string   TIMEFRAME   = "";
+string   SYMBOL      = Symbol();
+
+
+datetime DateTIME = iTime(Symbol(),Period(),0);
+ 
 int OnCalculate(const int rates_total,
                 const int prev_calculated,
                 const datetime &time[],
@@ -32,28 +29,78 @@ int OnCalculate(const int rates_total,
                 const long &volume[],
                 const int &spread[])
   {
-//---
-   
-//--- return value of prev_calculated for next call
-   return(rates_total);
+      if(DateTIME!=iTime(Symbol(),Period(),0)) // new candle on D1
+     {
+      //Do Something...
+      DateTIME=iTime(Symbol(),Period(),0);    // overwrite old with new value
+      Print(" TimeFRAME ", TIMEFRAME," SYMBOL ", SYMBOL);
+     }
+     return(rates_total);
   }
-//+------------------------------------------------------------------+
-//| Timer function                                                   |
-//+------------------------------------------------------------------+
-void OnTimer()
+
+ 
+ 
+ 
+ 
+ //functions 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ int OnInit()
   {
-//---
-   
+         if( Period() == PERIOD_M1 )
+         {
+            TIMEFRAME ="M1";
+         } else if (Period() == PERIOD_M5 )
+         {
+            TIMEFRAME ="M5";
+         } else if (Period() == PERIOD_M15 )
+         {
+            TIMEFRAME ="M15";
+         } else if (Period() == PERIOD_M30 )
+         {
+            TIMEFRAME ="M30";
+         } else if (Period() == PERIOD_H1 )
+         {
+            TIMEFRAME ="H1";
+         } else if (Period() == PERIOD_H4 )
+         {
+            TIMEFRAME ="H4";
+         } else if (Period() == PERIOD_D1 )
+         {
+            TIMEFRAME ="D1";
+         } else if (Period() == PERIOD_W1 )
+         {
+            TIMEFRAME ="W1";
+         } else if (Period() == PERIOD_MN1 )
+         {
+            TIMEFRAME ="MN1";
+         }
+         
+         
+         return(INIT_SUCCEEDED);
   }
-//+------------------------------------------------------------------+
-//| ChartEvent function                                              |
-//+------------------------------------------------------------------+
-void OnChartEvent(const int id,
-                  const long &lparam,
-                  const double &dparam,
-                  const string &sparam)
-  {
-//---
-   
-  }
-//+------------------------------------------------------------------+
