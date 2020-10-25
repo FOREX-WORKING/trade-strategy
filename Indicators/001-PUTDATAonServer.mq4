@@ -33,7 +33,11 @@ int OnCalculate(const int rates_total,
      {
       //Do Something...
       DateTIME=iTime(Symbol(),Period(),0);    // overwrite old with new value
-      Print(" TimeFRAME ", TIMEFRAME," SYMBOL ", SYMBOL);
+      Print(" TimeFRAME ", TIMEFRAME,
+            " SYMBOL ", SYMBOL,
+            " DateTIME ", DateTIME
+            
+              );
      }
      return(rates_total);
   }
