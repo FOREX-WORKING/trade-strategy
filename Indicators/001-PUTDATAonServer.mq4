@@ -12,6 +12,8 @@
 //| Custom indicator initialization function                         |
 //+------------------------------------------------------------------+
 
+#include "Jason-Include/pushdatatoapi.mqh"
+
 string   TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
 
