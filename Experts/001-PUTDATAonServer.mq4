@@ -34,6 +34,7 @@ void OnTick(void)
      if(DateTIME!=iTime(Symbol(),Period(),0))
      {
      
+     int hh = TimeGMT() - TimeLocal();
                   
                    DateTIME   =iTime(Symbol(),Period(),0); 
                    TIME_VAL   = iTime(Symbol(),Period(),1);
@@ -46,14 +47,23 @@ void OnTick(void)
                   string cookie=NULL,headers;
                   char post[],result[];
                   int res;
-                  string google_url="http://127.0.0.1/crud/add";
-                  ResetLastError();
-                  int timeout=5000; 
-                  res=WebRequest("GET",google_url,cookie,NULL,timeout,post,0,result,headers);
+                  string SENDURL="http://127.0.0.1/crud/add?";
+                  SENDURL += "TIMEFRAME=" + TIMEFRAME           + "&";
+                  SENDURL += "SYMBOL="    + SYMBOL              + "&";
+                  SENDURL += "TIME_VAL="  + TimeToStr(TIME_VAL) + "&";
+                  SENDURL += "OPEN="      + OPEN                + "&";
+                  SENDURL += "LOW="       + LOW                 + "&";
+                  SENDURL += "CLOSE="     + CLOSE               + "&";
+                  SENDURL += "HIGH="      + HIGH                + "&";
+                  
+                  //--- SENDURL += "=EUR/USD&TIME_VAL=2020:12:04 22:01&OPEN=1.425&LOW=1.2212&=4.25&=8.23";
+                  ResetLastError(); 
+                  
+                  res=WebRequest("GET",SENDURL,NULL,NULL,500,post,0,result,headers);
                   if(res==-1)
                     {
                      Print("Error in WebRequest. Error code  =",GetLastError());
-                     MessageBox("Add the address '"+google_url+"' in the list of allowed URLs on tab 'Expert Advisors'","Error",MB_ICONINFORMATION);
+                     MessageBox("Add the address '"+SENDURL+"' in the list of allowed URLs on tab 'Expert Advisors'","Error",MB_ICONINFORMATION);
                     }
                   else
                     {
@@ -77,3 +87,40 @@ void OnTick(void)
  
   }
 //+------------------------------------------------------------------+
+
+
+int OnInit()
+  {
+  
+         if( Period() == PERIOD_M1 ) 
+         { 
+            TIMEFRAME ="M1"; 
+         } else if (Period() == PERIOD_M5 ) 
+         { 
+            TIMEFRAME ="M5"; 
+         } else if (Period() == PERIOD_M15 ) 
+         { 
+            TIMEFRAME ="M15"; 
+         } else if (Period() == PERIOD_M30 ) 
+         { 
+            TIMEFRAME ="M30"; 
+         } else if (Period() == PERIOD_H1 ) 
+         { 
+            TIMEFRAME ="H1"; 
+         } else if (Period() == PERIOD_H4 ) 
+         { 
+            TIMEFRAME ="H4"; 
+         } else if (Period() == PERIOD_D1 ) 
+         { 
+            TIMEFRAME ="D1"; 
+         } else if (Period() == PERIOD_W1 ) 
+         { 
+            TIMEFRAME ="W1"; 
+         } else if (Period() == PERIOD_MN1 ) 
+         { 
+            TIMEFRAME ="MN1"; 
+         } 
+   
+//---
+   return(INIT_SUCCEEDED);
+  }
