@@ -1,9 +1,9 @@
 <chart>
 id=132481511375054160
-symbol=EURJPY
+symbol=EURUSD
 period=60
-leftpos=1551
-digits=3
+leftpos=5195
+digits=5
 scale=2
 graph=1
 fore=1
@@ -88,10 +88,10 @@ type=23
 object_name=Forex VCrush CodeAnalysis
 period_flags=0
 create_time=1603678429
-description=g
-color=8421504
-font=Webdings
-fontsize=62
+description=J
+color=16711680
+font=Wingdings 3
+fontsize=80
 angle=0
 anchor_pos=8
 background=0
@@ -168,8 +168,8 @@ type=23
 object_name=Forex VCrush CodeCurrPrice
 period_flags=0
 create_time=1603678429
-description=124.151
-color=255
+description=1.18405
+color=32768
 font=Arial Bold
 fontsize=17
 angle=0
@@ -208,7 +208,7 @@ type=23
 object_name=Forex VCrush CodeTimeLeft
 period_flags=0
 create_time=1603678429
-description=00:44:44
+description=00:07:47
 color=16777215
 font=Arial
 fontsize=11
@@ -400,6 +400,56 @@ color_3=8721863
 style_3=0
 weight_3=3
 arrow_3=104
+period_flags=0
+show_data=1
+</indicator>
+</window>
+
+<window>
+height=50
+fixed_height=0
+<indicator>
+name=Custom Indicator
+<expert>
+name=Jason-Indicator\!!!-MT4 X-CCI-TREND-03
+flags=339
+window_num=1
+</expert>
+shift_0=0
+draw_0=2
+color_0=16711680
+style_0=0
+weight_0=2
+shift_1=0
+draw_1=2
+color_1=255
+style_1=0
+weight_1=2
+shift_2=0
+draw_2=2
+color_2=16748574
+style_2=0
+weight_2=2
+shift_3=0
+draw_3=2
+color_3=10507775
+style_3=0
+weight_3=2
+shift_4=0
+draw_4=12
+color_4=0
+style_4=0
+weight_4=0
+min=-250.00000000
+max=250.00000000
+levels_color=10658466
+levels_style=0
+levels_weight=2
+level_0=-100.00000000
+level_1=100.00000000
+level_2=0.00000000
+level_3=200.00000000
+level_4=-200.00000000
 period_flags=0
 show_data=1
 </indicator>
