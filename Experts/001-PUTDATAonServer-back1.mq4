@@ -21,9 +21,7 @@ input int    MATrendPeriod =26;
 string TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
 
-double OPEN, LOW, CLOSE, HIGH, MA20_SIMPLE_HLCC, MA50_SIMPLE_HLCC = 0.0;
-
-double Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN,Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = 0.0 ;
+double OPEN, LOW, CLOSE, HIGH = 0.0;
 
 
 datetime DateTIME = iTime(Symbol(),Period(),0);
@@ -44,36 +42,19 @@ void OnTick(void)
                    LOW        = Low[1];
                    CLOSE      = Close[1];
                    HIGH       = High[1];
-                   
-                   MA20_SIMPLE_HLCC = iMA(SYMBOL, Period(), 20, 0, MODE_SMA, PRICE_WEIGHTED, 1);
-                   MA50_SIMPLE_HLCC = iMA(SYMBOL, Period(), 50, 0, MODE_SMA, PRICE_WEIGHTED, 1);
-                   
-                   
-                   Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_MAIN, 1); 
-                   Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_SIGNAL, 1);
-                   
-                   
-                   
-                   //---  Print(MA50_SIMPLE_HLCC);  
+                     
       
                   string cookie=NULL,headers;
                   char post[],result[];
                   int res;
                   string SENDURL="http://127.0.0.1/crud/add?";
-                  SENDURL += "TIMEFRAME="             + TIMEFRAME                + "&";
-                  SENDURL += "SYMBOL="                + SYMBOL                   + "&";
-                  SENDURL += "TIME_VAL="              + TimeToStr(TIME_VAL)      + "&";
-                  SENDURL += "OPEN="                  + OPEN                     + "&";
-                  SENDURL += "LOW="                   + LOW                      + "&";
-                  SENDURL += "CLOSE="                 + CLOSE                    + "&";
-                  SENDURL += "HIGH="                  + HIGH                     + "&";
-                  SENDURL += "MA50_SIMPLE_HLCC="      + MA50_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA20_SIMPLE_HLCC="      + MA20_SIMPLE_HLCC         + "&";
-                  SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN="     + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN           + "&";
-                  SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL="   + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL         + "&";
-                  
-                  
-                  
+                  SENDURL += "TIMEFRAME=" + TIMEFRAME           + "&";
+                  SENDURL += "SYMBOL="    + SYMBOL              + "&";
+                  SENDURL += "TIME_VAL="  + TimeToStr(TIME_VAL) + "&";
+                  SENDURL += "OPEN="      + OPEN                + "&";
+                  SENDURL += "LOW="       + LOW                 + "&";
+                  SENDURL += "CLOSE="     + CLOSE               + "&";
+                  SENDURL += "HIGH="      + HIGH                + "&";
                   
                   //--- SENDURL += "=EUR/USD&TIME_VAL=2020:12:04 22:01&OPEN=1.425&LOW=1.2212&=4.25&=8.23";
                   ResetLastError(); 
