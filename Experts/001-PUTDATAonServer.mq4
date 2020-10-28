@@ -6,17 +6,12 @@
 #property copyright   "2005-2014, MetaQuotes Software Corp."
 #property link        "http://www.mql4.com"
 
- 
-
-
 input double TakeProfit    =50;
 input double Lots          =0.1;
 input double TrailingStop  =30;
 input double MACDOpenLevel =3;
 input double MACDCloseLevel=2;
 input int    MATrendPeriod =26;
- 
-
 
 string TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
@@ -27,14 +22,16 @@ double Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN,Stochastic_Oscillator_K20_D3
 
 double X_CCI_TREND1, X_CCI_TREND2, X_CCI_TREND3, X_CCI_TREND4,X_CCI_TREND = 0.0;
 
-
 double FPH_Oscilator1,FPH_Oscilator2,FPH_Oscilator,FPH_Oscilator_up, FPH_Oscilator_down   = 0.0;
 
+double FPH_Filter1, FPH_Filter2, FPH_Filter,FPH_Filter_line    = 0.0;
+
+double Forex_Stryder_Signals2_6_1, Forex_Stryder_Signals2_6_2, Forex_Stryder_Signals2_6 = 0.0;
+
+double Forex_VCrush_Signal_20_1, Forex_VCrush_Signal_20_2 , Forex_VCrush_Signal_20 = 0.0;
 
 datetime DateTIME = iTime(Symbol(),Period(),0);
 datetime TIME_VAL = iTime(Symbol(),Period(),1);
-
-
 
 void OnTick(void)
   {
@@ -52,8 +49,22 @@ void OnTick(void)
                    
                    MA20_SIMPLE_HLCC = iMA(SYMBOL, Period(), 20, 0, MODE_SMA, PRICE_WEIGHTED, 1);
                    MA50_SIMPLE_HLCC = iMA(SYMBOL, Period(), 50, 0, MODE_SMA, PRICE_WEIGHTED, 1);
+                   
+                   Forex_Stryder_Signals2_6_1 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-Stryder-Signals", Period(), 2, 6, 0,1);
+                   Forex_Stryder_Signals2_6_2 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-Stryder-Signals", Period(), 2, 6, 1,1);
+                   if (!(Forex_Stryder_Signals2_6_1 < 100000 && Forex_Stryder_Signals2_6_1 > -100000)){ Forex_Stryder_Signals2_6_1 = 0; }
+                   if (!(Forex_Stryder_Signals2_6_2 < 100000 && Forex_Stryder_Signals2_6_2 > -100000)){ Forex_Stryder_Signals2_6_2 = 0; }
+                   Forex_Stryder_Signals2_6 = Forex_Stryder_Signals2_6_1 - Forex_Stryder_Signals2_6_2;
+                   
+                   Forex_VCrush_Signal_20_1 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-VCrush-Signal", Period(), 20 , 0,1);
+                   Forex_VCrush_Signal_20_2 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-VCrush-Signal", Period(), 20 , 1,1);
+                   if (!(Forex_VCrush_Signal_20_1 < 100000 && Forex_VCrush_Signal_20_1 > -100000)){ Forex_VCrush_Signal_20_1 = 0; }
+                   if (!(Forex_VCrush_Signal_20_2 < 100000 && Forex_VCrush_Signal_20_2 > -100000)){ Forex_VCrush_Signal_20_2 = 0; }
+                   Forex_VCrush_Signal_20 = Forex_VCrush_Signal_20_1 - Forex_VCrush_Signal_20_2;
+                   
+                   Print("jason", Forex_VCrush_Signal_20);
                                       
-                   Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_MAIN, 1); 
+                   Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN   = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_MAIN,   1); 
                    Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_SIGNAL, 1);
                    
                    X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",0,1);
@@ -64,18 +75,26 @@ void OnTick(void)
                    
                    
                    FPH_Oscilator1 = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 0,1);
-                   FPH_Oscilator2 = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 1,1);
-                   
-                   FPH_Oscilator_up   = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 4,1);
-                   FPH_Oscilator_down = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 5,1);
-                   
+                   FPH_Oscilator2 = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 1,1);                                                        
                    if (!(FPH_Oscilator1 < 1000 && FPH_Oscilator1 > -1000)){ FPH_Oscilator1 = 0; }
                    if (!(FPH_Oscilator2 < 1000 && FPH_Oscilator2 > -1000)){ FPH_Oscilator2 = 0; }
                    FPH_Oscilator = FPH_Oscilator1 + FPH_Oscilator2;
+                                      
+                   FPH_Oscilator_up   = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 4,1);
+                   FPH_Oscilator_down = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 5,1);
+                   
+                   FPH_Filter1 = X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 0,1);
+                   FPH_Filter2 = X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 2,1);
+                   if (!(FPH_Filter1 < 1000 && FPH_Filter1 > -1000)){ FPH_Filter1 = 0; }
+                   if (!(FPH_Filter2 < 1000 && FPH_Filter2 > -1000)){ FPH_Filter2 = 0; }
+                   FPH_Filter = FPH_Filter1 + FPH_Filter2;
+                                     
+                   FPH_Filter_line = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 4,1);
                    
                    
+                  
                    
-                                      Print("jason", FPH_Oscilator_down);
+                   
                    
                    
                    //---  Print(MA50_SIMPLE_HLCC);  
@@ -99,6 +118,18 @@ void OnTick(void)
                   SENDURL += "FPH_Oscilator="         + FPH_Oscilator            + "&";
                   SENDURL += "FPH_Oscilator_up="      + FPH_Oscilator_up         + "&";
                   SENDURL += "FPH_Oscilator_down="    + FPH_Oscilator_down       + "&";
+                  
+                  SENDURL += "FPH_Filter="            + FPH_Filter               + "&";
+                  SENDURL += "FPH_Filter_line="       + FPH_Filter_line          + "&";
+                  
+                  
+                  
+                  
+                  
+                  SENDURL += "Forex_Stryder_Signals2_6="                         + Forex_Stryder_Signals2_6                               + "&";
+                  SENDURL += "Forex_VCrush_Signal_20="                           + Forex_VCrush_Signal_20                                 + "&";
+                  
+                  
                   
                   
                   
