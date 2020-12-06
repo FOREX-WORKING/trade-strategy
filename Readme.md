@@ -1,14 +1,14 @@
-mklink /D "C:\Program Files (x86)\CMC Markets MetaTrader 4\MQL4\Indicators\Jason-Indicator" "C:\Projects\Jason\FOREX-WORKING\trade-strategy\Indicators"
+mklink /D "C:\Users\jason\AppData\Roaming\MetaQuotes\Terminal\B313D8B5E3EEA7D6CF15F515B9125C20\MQL4\Indicators\Jason-Indicator" "E:\Projects\myGitHub\FOREX-WORKING\trade-strategy\Indicators"
 
 
  
- mklink /D "C:\Program Files (x86)\CMC Markets MetaTrader 4\MQL4\Experts\Jason-Experts" "C:\Projects\Jason\FOREX-WORKING\trade-strategy\Experts"
+ mklink /D "C:\Users\jason\AppData\Roaming\MetaQuotes\Terminal\B313D8B5E3EEA7D6CF15F515B9125C20\MQL4\Experts\Jason-Experts" "E:\Projects\myGitHub\FOREX-WORKING\trade-strategy\Experts"
 
 
-  mklink /D "C:\Program Files (x86)\CMC Markets MetaTrader 4\MQL4\Scripts\Jason-Scripts" "C:\Projects\Jason\FOREX-WORKING\trade-strategy\Scripts"
+  mklink /D "C:\Users\jason\AppData\Roaming\MetaQuotes\Terminal\B313D8B5E3EEA7D6CF15F515B9125C20\MQL4\Scripts\Jason-Scripts" "E:\Projects\myGitHub\FOREX-WORKING\trade-strategy\Scripts"
 
- mklink /D "C:\Program Files (x86)\CMC Markets MetaTrader 4\MQL4\Include\Jason-Include" "C:\Projects\Jason\FOREX-WORKING\trade-strategy\Include"
+ mklink /D "C:\Users\jason\AppData\Roaming\MetaQuotes\Terminal\B313D8B5E3EEA7D6CF15F515B9125C20\MQL4\Include\Jason-Include" "E:\Projects\myGitHub\FOREX-WORKING\trade-strategy\Include"
 
-   mklink /D "C:\Program Files (x86)\CMC Markets MetaTrader 4\templates" "C:\Projects\Jason\FOREX-WORKING\trade-strategy\templates"
+   mklink /D "C:\Users\jason\AppData\Roaming\MetaQuotes\Terminal\B313D8B5E3EEA7D6CF15F515B9125C20\templates" "E:\Projects\myGitHub\FOREX-WORKING\trade-strategy\templates"
 
     

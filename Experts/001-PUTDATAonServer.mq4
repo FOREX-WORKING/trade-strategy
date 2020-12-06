@@ -102,7 +102,7 @@ void OnTick(void)
                   string cookie=NULL,headers;
                   char post[],result[];
                   int res;
-                  string SENDURL="http://127.0.0.1/crud/add?";
+                  string SENDURL="http://001-crud.forex.jasonjafari.com/crud/add?";
                   SENDURL += "TIMEFRAME="             + TIMEFRAME                + "&";
                   SENDURL += "SYMBOL="                + SYMBOL                   + "&";
                   SENDURL += "TIME_VAL="              + TimeToStr(TIME_VAL)      + "&";
