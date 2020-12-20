@@ -23,7 +23,7 @@ string   SYMBOL      = Symbol();
 
 double OPEN, LOW, CLOSE, HIGH,AVRAGE   = 0.0;
 double MA12_SIMPLE_HLCC,  MA20_SIMPLE_HLCC, MA50_SIMPLE_HLCC , MA70_SIMPLE_HLCC , MA100_SIMPLE_HLCC ,MA150_SIMPLE_HLCC, MA300_SIMPLE_HLCC = 0.0 ;
-double Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN,Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = 0.0 ;
+double Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN,Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL , Stochastic_Oscillator_K20_D3_S7_CC_HLCC_DIFF  = 0.0 ;
 
 double X_CCI_TREND1, X_CCI_TREND2, X_CCI_TREND3, X_CCI_TREND4,X_CCI_TREND = 0.0;
 
@@ -44,6 +44,11 @@ void OnTick(void)
      {
      
      int hh = TimeGMT() - TimeLocal();
+     
+                  string cookie=NULL,headers;
+                  char post[],result[];
+                  int res;
+                  string SENDURL="http://001-crud.forex.jasonjafari.com/crud/add?";
                   
                    DateTIME               =iTime(Symbol(),Period(),0); 
                    TIME_VAL              = iTime(Symbol(),Period(),1);
@@ -54,6 +59,18 @@ void OnTick(void)
                    AVRAGE =  ( OPEN + LOW + HIGH + CLOSE * 5 ) / 8;
                    
                    
+                   //---  Print(MA50_SIMPLE_HLCC);  
+      
+                  SENDURL += "TIMEFRAME="                  + TIMEFRAME                 + "&";
+                  SENDURL += "SYMBOL="                        + SYMBOL                       + "&";
+                  SENDURL += "TIME_VAL="                      + TimeToStr(TIME_VAL)   + "&";
+                  SENDURL += "OPEN="                             + OPEN                           + "&";
+                  SENDURL += "LOW="                               + LOW                             + "&";
+                  SENDURL += "CLOSE="                           + CLOSE                          + "&";
+                  SENDURL += "HIGH="                              + HIGH                             + "&";
+                  SENDURL += "AVRAGE="                        + AVRAGE                        + "&";
+                   
+                   
                    MA12_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 12, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
                    MA20_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 20, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
                    MA50_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 50, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
@@ -62,7 +79,14 @@ void OnTick(void)
                    MA150_SIMPLE_HLCC = iMA(SYMBOL, Period(), 150, 0, MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
                    MA300_SIMPLE_HLCC = iMA(SYMBOL, Period(), 300, 0, MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
                    
-
+                  
+                  SENDURL += "MA12_SIMPLE_HLCC="         + MA12_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA20_SIMPLE_HLCC="         + MA20_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA50_SIMPLE_HLCC="         + MA50_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA70_SIMPLE_HLCC="         + MA70_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA100_SIMPLE_HLCC="       + MA100_SIMPLE_HLCC        + "&";
+                  SENDURL += "MA150_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
+                  SENDURL += "MA300_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
 
 
 
@@ -71,18 +95,25 @@ void OnTick(void)
                    Forex_Stryder_Signals2_6_2 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-Stryder-Signals", Period(), 2, 6, 1,1);
                    if (!(Forex_Stryder_Signals2_6_1 < 100000 && Forex_Stryder_Signals2_6_1 > -100000)){ Forex_Stryder_Signals2_6_1 = 0; }
                    if (!(Forex_Stryder_Signals2_6_2 < 100000 && Forex_Stryder_Signals2_6_2 > -100000)){ Forex_Stryder_Signals2_6_2 = 0; }
-                   Forex_Stryder_Signals2_6 = Forex_Stryder_Signals2_6_1 - Forex_Stryder_Signals2_6_2;
+                   Forex_Stryder_Signals2_6 = MathAbs( Forex_Stryder_Signals2_6_1 - Forex_Stryder_Signals2_6_2) - AVRAGE ;
+                                      
+                   SENDURL += "Forex_Stryder_Signals2_6="         + Forex_Stryder_Signals2_6         + "&";
                    
                    Forex_VCrush_Signal_20_1 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-VCrush-Signal", Period(), 20 , 0,1);
                    Forex_VCrush_Signal_20_2 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-VCrush-Signal", Period(), 20 , 1,1);
                    if (!(Forex_VCrush_Signal_20_1 < 100000 && Forex_VCrush_Signal_20_1 > -100000)){ Forex_VCrush_Signal_20_1 = 0; }
                    if (!(Forex_VCrush_Signal_20_2 < 100000 && Forex_VCrush_Signal_20_2 > -100000)){ Forex_VCrush_Signal_20_2 = 0; }
-                   Forex_VCrush_Signal_20 = Forex_VCrush_Signal_20_1 - Forex_VCrush_Signal_20_2;
+                   Forex_VCrush_Signal_20 = MathAbs(Forex_VCrush_Signal_20_1 - Forex_VCrush_Signal_20_2) - AVRAGE;
+                  
+                   SENDURL += "Forex_VCrush_Signal_20="         + Forex_VCrush_Signal_20         + "&";
                    
-                   Print("jason", Forex_VCrush_Signal_20);
+
                                       
                    Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN   = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_MAIN,   1); 
                    Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = iStochastic(SYMBOL, Period(), 20 , 3, 7, MODE_SMA, 1, MODE_SIGNAL, 1);
+                   Stochastic_Oscillator_K20_D3_S7_CC_HLCC_DIFF = Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL - Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN;
+                   
+                   SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_DIFF="         + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_DIFF         + "&";
                    
                    X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",0,1);
                    X_CCI_TREND2=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",1,1);
@@ -114,34 +145,8 @@ void OnTick(void)
                    
                    
                    
-                   //---  Print(MA50_SIMPLE_HLCC);  
+         
       
-                  string cookie=NULL,headers;
-                  char post[],result[];
-                  int res;
-                  string SENDURL="http://001-crud.forex.jasonjafari.com/crud/add?";
-                  SENDURL += "TIMEFRAME="                  + TIMEFRAME                 + "&";
-                  SENDURL += "SYMBOL="                        + SYMBOL                       + "&";
-                  SENDURL += "TIME_VAL="                      + TimeToStr(TIME_VAL)   + "&";
-                  SENDURL += "OPEN="                             + OPEN                           + "&";
-                  SENDURL += "LOW="                               + LOW                             + "&";
-                  SENDURL += "CLOSE="                           + CLOSE                          + "&";
-                  SENDURL += "HIGH="                              + HIGH                             + "&";
-                  SENDURL += "AVRAGE="                        + AVRAGE                        + "&";
-                  
-                  
-                  
-                  SENDURL += "MA12_SIMPLE_HLCC="         + MA12_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA20_SIMPLE_HLCC="         + MA20_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA50_SIMPLE_HLCC="         + MA50_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA70_SIMPLE_HLCC="         + MA70_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA100_SIMPLE_HLCC="       + MA100_SIMPLE_HLCC        + "&";
-                  SENDURL += "MA150_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
-                  SENDURL += "MA300_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
-                  
-                  
-             
-
 
 
 
