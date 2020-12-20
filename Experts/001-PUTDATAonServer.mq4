@@ -29,11 +29,12 @@ double X_CCI_TREND1, X_CCI_TREND2, X_CCI_TREND3, X_CCI_TREND4,X_CCI_TREND = 0.0;
 
 double FPH_Oscilator1,FPH_Oscilator2,FPH_Oscilator,FPH_Oscilator_up, FPH_Oscilator_down   = 0.0;
 
-double FPH_Filter1, FPH_Filter2, FPH_Filter,FPH_Filter_line    = 0.0;
 
 double Forex_Stryder_Signals2_6_1, Forex_Stryder_Signals2_6_2, Forex_Stryder_Signals2_6 = 0.0;
 
 double Forex_VCrush_Signal_20_1, Forex_VCrush_Signal_20_2 , Forex_VCrush_Signal_20 = 0.0;
+
+double MACD_12_26_9_01, MACD_12_26_9_02, RSI_14 = 0.0;
 
 datetime DateTIME = iTime(Symbol(),Period(),0);
 datetime TIME_VAL = iTime(Symbol(),Period(),1);
@@ -119,7 +120,9 @@ void OnTick(void)
                    X_CCI_TREND2=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",1,1);
                    X_CCI_TREND3=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",2,1);
                    X_CCI_TREND4=iCustom(SYMBOL, Period(),"Jason-Indicator/!!!-MT4 X-CCI-TREND-03",3,1);
-                   X_CCI_TREND = X_CCI_TREND1 + X_CCI_TREND2 + X_CCI_TREND3+ X_CCI_TREND4;
+                   X_CCI_TREND =( X_CCI_TREND1 + X_CCI_TREND2 + X_CCI_TREND3+ X_CCI_TREND4)/100;
+                   
+                   SENDURL += "X_CCI_TREND="         + X_CCI_TREND         + "&";
                    
                    
                    FPH_Oscilator1 = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 0,1);
@@ -127,55 +130,34 @@ void OnTick(void)
                    if (!(FPH_Oscilator1 < 1000 && FPH_Oscilator1 > -1000)){ FPH_Oscilator1 = 0; }
                    if (!(FPH_Oscilator2 < 1000 && FPH_Oscilator2 > -1000)){ FPH_Oscilator2 = 0; }
                    FPH_Oscilator = FPH_Oscilator1 + FPH_Oscilator2;
+                   
+                   SENDURL += "FPH_Oscilator="         + FPH_Oscilator         + "&";
+                   
                                       
                    FPH_Oscilator_up   = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 4,1);
+                   
+                   SENDURL += "FPH_Oscilator_up="         + FPH_Oscilator_up         + "&";
+                   
+                   
                    FPH_Oscilator_down = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Oscilator", 5, 35, "elliotWaveLines", "Black", 2, 10, 20, "Silver", 0 , 5,1);
                    
-                   FPH_Filter1 = X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 0,1);
-                   FPH_Filter2 = X_CCI_TREND1=iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 2,1);
-                   if (!(FPH_Filter1 < 1000 && FPH_Filter1 > -1000)){ FPH_Filter1 = 0; }
-                   if (!(FPH_Filter2 < 1000 && FPH_Filter2 > -1000)){ FPH_Filter2 = 0; }
-                   FPH_Filter = FPH_Filter1 + FPH_Filter2;
-                                     
-                   FPH_Filter_line = iCustom(SYMBOL, Period(),"Jason-Indicator/FPH_Filter", 5, 14, 0, 5.0, 0.0, false, 3, false, false, false, false, false, false, 4,1);
-                   
-                   
+                   SENDURL += "FPH_Oscilator_down="         + FPH_Oscilator_down         + "&";
                   
-                   
-                   
-                   
-                   
+                  MACD_12_26_9_01 = iMACD(SYMBOL, Period(), 12, 26, 9, PRICE_WEIGHTED,    0, 1) * 1000;
+                  MACD_12_26_9_02 = iMACD(SYMBOL, Period(), 12, 26, 9, PRICE_WEIGHTED,    1, 1) * 1000;
+                                                        
+                  SENDURL += "MACD_12_26_9_01="         + MACD_12_26_9_01         + "&";
+                  SENDURL += "MACD_12_26_9_02="         + MACD_12_26_9_02         + "&";
+                  
+                  
+                  RSI_14  =(iRSI(SYMBOL, Period(), 14, PRICE_WEIGHTED, 1)  -50)/50;
+                                                        
+                  SENDURL += "RSI_14="         + RSI_14         + "&";
          
       
 
 
-
-                  
-        //          SENDURL += "X_CCI_TREND="           + X_CCI_TREND              + "&";
-                  
-         //         SENDURL += "FPH_Oscilator="         + FPH_Oscilator            + "&";
-         //         SENDURL += "FPH_Oscilator_up="      + FPH_Oscilator_up         + "&";
-            //      SENDURL += "FPH_Oscilator_down="    + FPH_Oscilator_down       + "&";
-                  
-           //       SENDURL += "FPH_Filter="            + FPH_Filter               + "&";
-         //         SENDURL += "FPH_Filter_line="       + FPH_Filter_line          + "&";
-                  
-                  
-                  
-                  
-                  
-         //         SENDURL += "Forex_Stryder_Signals2_6="                         + Forex_Stryder_Signals2_6                               + "&";
-           //       SENDURL += "Forex_VCrush_Signal_20="                           + Forex_VCrush_Signal_20                                 + "&";
-                  
-                  
-                  
-                  
-                  
-             //     SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN="     + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN           + "&";
-            //      SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL="   + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL         + "&";
-                  
-                  
-                  
+ 
                   
                   //--- SENDURL += "=EUR/USD&TIME_VAL=2020:12:04 22:01&OPEN=1.425&LOW=1.2212&=4.25&=8.23";
                   ResetLastError(); 
