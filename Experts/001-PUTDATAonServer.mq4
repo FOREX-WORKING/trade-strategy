@@ -16,8 +16,13 @@ input int    MATrendPeriod =26;
 string TIMEFRAME   = "";
 string   SYMBOL      = Symbol();
 
-double OPEN, LOW, CLOSE, HIGH, MA20_SIMPLE_HLCC, MA50_SIMPLE_HLCC = 0.0;
+ 
 
+
+
+
+double OPEN, LOW, CLOSE, HIGH,AVRAGE   = 0.0;
+double MA12_SIMPLE_HLCC,  MA20_SIMPLE_HLCC, MA50_SIMPLE_HLCC , MA70_SIMPLE_HLCC , MA100_SIMPLE_HLCC ,MA150_SIMPLE_HLCC, MA300_SIMPLE_HLCC = 0.0 ;
 double Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN,Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL = 0.0 ;
 
 double X_CCI_TREND1, X_CCI_TREND2, X_CCI_TREND3, X_CCI_TREND4,X_CCI_TREND = 0.0;
@@ -40,15 +45,27 @@ void OnTick(void)
      
      int hh = TimeGMT() - TimeLocal();
                   
-                   DateTIME   =iTime(Symbol(),Period(),0); 
-                   TIME_VAL   = iTime(Symbol(),Period(),1);
-                   OPEN       = Open[1];
-                   LOW        = Low[1];
-                   CLOSE      = Close[1];
-                   HIGH       = High[1];
+                   DateTIME               =iTime(Symbol(),Period(),0); 
+                   TIME_VAL              = iTime(Symbol(),Period(),1);
+                   OPEN                     = Open[1];
+                   LOW                       = Low[1];
+                   CLOSE                   = Close[1];
+                   HIGH                      = High[1];
+                   AVRAGE =  ( OPEN + LOW + HIGH + CLOSE * 5 ) / 8;
                    
-                   MA20_SIMPLE_HLCC = iMA(SYMBOL, Period(), 20, 0, MODE_SMA, PRICE_WEIGHTED, 1);
-                   MA50_SIMPLE_HLCC = iMA(SYMBOL, Period(), 50, 0, MODE_SMA, PRICE_WEIGHTED, 1);
+                   
+                   MA12_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 12, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA20_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 20, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA50_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 50, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA70_SIMPLE_HLCC   = iMA(SYMBOL, Period(), 70, 0,  MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA100_SIMPLE_HLCC = iMA(SYMBOL, Period(), 100, 0, MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA150_SIMPLE_HLCC = iMA(SYMBOL, Period(), 150, 0, MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   MA300_SIMPLE_HLCC = iMA(SYMBOL, Period(), 300, 0, MODE_SMA, PRICE_WEIGHTED, 1)  - AVRAGE ;
+                   
+
+
+
+
                    
                    Forex_Stryder_Signals2_6_1 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-Stryder-Signals", Period(), 2, 6, 0,1);
                    Forex_Stryder_Signals2_6_2 = iCustom(SYMBOL, Period(),"Jason-Indicator/Forex-Stryder-Signals", Period(), 2, 6, 1,1);
@@ -103,38 +120,54 @@ void OnTick(void)
                   char post[],result[];
                   int res;
                   string SENDURL="http://001-crud.forex.jasonjafari.com/crud/add?";
-                  SENDURL += "TIMEFRAME="             + TIMEFRAME                + "&";
-                  SENDURL += "SYMBOL="                + SYMBOL                   + "&";
-                  SENDURL += "TIME_VAL="              + TimeToStr(TIME_VAL)      + "&";
-                  SENDURL += "OPEN="                  + OPEN                     + "&";
-                  SENDURL += "LOW="                   + LOW                      + "&";
-                  SENDURL += "CLOSE="                 + CLOSE                    + "&";
-                  SENDURL += "HIGH="                  + HIGH                     + "&";
-                  SENDURL += "MA50_SIMPLE_HLCC="      + MA50_SIMPLE_HLCC         + "&";
-                  SENDURL += "MA20_SIMPLE_HLCC="      + MA20_SIMPLE_HLCC         + "&";
-                  
-                  SENDURL += "X_CCI_TREND="           + X_CCI_TREND              + "&";
-                  
-                  SENDURL += "FPH_Oscilator="         + FPH_Oscilator            + "&";
-                  SENDURL += "FPH_Oscilator_up="      + FPH_Oscilator_up         + "&";
-                  SENDURL += "FPH_Oscilator_down="    + FPH_Oscilator_down       + "&";
-                  
-                  SENDURL += "FPH_Filter="            + FPH_Filter               + "&";
-                  SENDURL += "FPH_Filter_line="       + FPH_Filter_line          + "&";
+                  SENDURL += "TIMEFRAME="                  + TIMEFRAME                 + "&";
+                  SENDURL += "SYMBOL="                        + SYMBOL                       + "&";
+                  SENDURL += "TIME_VAL="                      + TimeToStr(TIME_VAL)   + "&";
+                  SENDURL += "OPEN="                             + OPEN                           + "&";
+                  SENDURL += "LOW="                               + LOW                             + "&";
+                  SENDURL += "CLOSE="                           + CLOSE                          + "&";
+                  SENDURL += "HIGH="                              + HIGH                             + "&";
+                  SENDURL += "AVRAGE="                        + AVRAGE                        + "&";
                   
                   
                   
+                  SENDURL += "MA12_SIMPLE_HLCC="         + MA12_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA20_SIMPLE_HLCC="         + MA20_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA50_SIMPLE_HLCC="         + MA50_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA70_SIMPLE_HLCC="         + MA70_SIMPLE_HLCC         + "&";
+                  SENDURL += "MA100_SIMPLE_HLCC="       + MA100_SIMPLE_HLCC        + "&";
+                  SENDURL += "MA150_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
+                  SENDURL += "MA300_SIMPLE_HLCC="       + MA50_SIMPLE_HLCC          + "&";
                   
                   
-                  SENDURL += "Forex_Stryder_Signals2_6="                         + Forex_Stryder_Signals2_6                               + "&";
-                  SENDURL += "Forex_VCrush_Signal_20="                           + Forex_VCrush_Signal_20                                 + "&";
+             
+
+
+
+
+                  
+        //          SENDURL += "X_CCI_TREND="           + X_CCI_TREND              + "&";
+                  
+         //         SENDURL += "FPH_Oscilator="         + FPH_Oscilator            + "&";
+         //         SENDURL += "FPH_Oscilator_up="      + FPH_Oscilator_up         + "&";
+            //      SENDURL += "FPH_Oscilator_down="    + FPH_Oscilator_down       + "&";
+                  
+           //       SENDURL += "FPH_Filter="            + FPH_Filter               + "&";
+         //         SENDURL += "FPH_Filter_line="       + FPH_Filter_line          + "&";
                   
                   
                   
                   
                   
-                  SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN="     + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN           + "&";
-                  SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL="   + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL         + "&";
+         //         SENDURL += "Forex_Stryder_Signals2_6="                         + Forex_Stryder_Signals2_6                               + "&";
+           //       SENDURL += "Forex_VCrush_Signal_20="                           + Forex_VCrush_Signal_20                                 + "&";
+                  
+                  
+                  
+                  
+                  
+             //     SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN="     + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_MAIN           + "&";
+            //      SENDURL += "Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL="   + Stochastic_Oscillator_K20_D3_S7_CC_HLCC_SIGNAL         + "&";
                   
                   
                   
