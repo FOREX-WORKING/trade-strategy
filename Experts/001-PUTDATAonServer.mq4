@@ -49,7 +49,7 @@ void OnTick(void)
                   string cookie=NULL,headers;
                   char post[],result[];
                   int res;
-                  string SENDURL="http://001-crud.forex.jasonjafari.com/crud/add?";
+                  string SENDURL="http://001-metatrader-mysql-express.forex.jasonjafari.com/crud/add?";
                   
                    DateTIME               =iTime(Symbol(),Period(),0); 
                    TIME_VAL              = iTime(Symbol(),Period(),1);
