@@ -10,3 +10,4 @@ Indicators/kanal-ant-indicator.ex4
 Indicators/FPH_Filter.ex4
 Indicators/linear-regression-indikator.ex4
 Indicators/RunMedian.ex4
+Indicators/median/median.ex4
