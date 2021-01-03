@@ -32,11 +32,22 @@ int OnInit()
  
   return(0); 
 }
-int OnCalculate( ){
+int OnCalculate(  const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[] ){
    Print("Sala,");
-   runmedian(301);
+   //---runmedian(301);
+   
+   
  
-   return(0);
+   return(rates_total);
 }
 
 int deinit()
@@ -44,18 +55,7 @@ int deinit()
    return(0); 
 }
 
-int start()
-{
-   int counted_bars=IndicatorCounted();
-   if(counted_bars>0) counted_bars--;
-   int limit=Bars-counted_bars;
-   if(counted_bars==0) limit--;
-   runmedian(limit);
-   
-   return(0);   
-
-}
-
+ 
 
 
 
