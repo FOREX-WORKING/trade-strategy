@@ -21,11 +21,14 @@ input int magicnumber = 1;
 input double lotPipProfit = 0;
 input int profitCount = 0;
 
+int tardeStat = 0;
+
 double vbid    = MarketInfo( Symbol(),MODE_BID);
 double vask    = MarketInfo( Symbol(),MODE_ASK);
 double vpoint  = MarketInfo( Symbol(),MODE_POINT);
 int    vdigits = (int)MarketInfo( Symbol(),MODE_DIGITS);
 int    vspread = (int)MarketInfo( Symbol(),MODE_SPREAD);
+
 
 #include <Jason-Include\Read_Median.mqh>
 
@@ -48,6 +51,9 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTick()
 {
+  int yPosition = 14;
+  int yStep = 16;
+  int fontSize = 12 ;
   double sorttt[];
   long   colorrr[];
   ArrayResize(colorrr,6);
@@ -82,7 +88,8 @@ void OnTick()
     ObjectSetInteger(0,uniqueTime + string(i),OBJPROP_WIDTH,2);
     ObjectSetInteger(0,uniqueTime + string(i),OBJPROP_COLOR,colorrr[i]);
   }
-  int ticket=OrderSend(
+  if ( tardeStat == 0) {
+    int ticket=OrderSend(
                         Symbol(),         // string   symbol,              // symbol
                         OP_BUY,           // int      cmd,                 // operation
                         0.01,                // double   volume,              // volume
@@ -95,45 +102,69 @@ void OnTick()
                         0,                // datetime expiration=0,        // pending order expiration
                         clrGreen          // color    arrow_color=clrNONE  // color
                         );
-
-
-
-
-  ObjectDelete(0,"lotPipProfit");
-  ObjectCreate("lotPipProfit", OBJ_LABEL, 0, 0, 0);// Creating obj.
-  ObjectSet("lotPipProfit", OBJPROP_CORNER, 1);    // Reference corner
-  ObjectSet("lotPipProfit", OBJPROP_XDISTANCE, 10);// X coordinate
-  ObjectSet("lotPipProfit", OBJPROP_YDISTANCE, 15);// Y coordinate
-  ObjectSetInteger(0, "lotPipProfit", OBJPROP_CORNER, CORNER_LEFT_UPPER);
-  ObjectSetInteger(0, "lotPipProfit", OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
-  ObjectSetText(
-  "lotPipProfit",                       // object name
-  "LOT PIP PROFIT: " + string(lotPipProfit),   
-  20,                                   // font size
-  "Times New Roman" ,                   // font name
-  clrYellow                              // text color
-  );
-
-  ObjectDelete(0,"profitCount");
-  ObjectCreate("profitCount", OBJ_LABEL, 0, 0, 0);// Creating obj.
-  ObjectSet("profitCount", OBJPROP_CORNER, 1);    // Reference corner
-  ObjectSet("profitCount", OBJPROP_XDISTANCE, 10);// X coordinate
-  ObjectSet("profitCount", OBJPROP_YDISTANCE, 40);// Y coordinate
-  ObjectSetInteger(0, "profitCount", OBJPROP_CORNER, CORNER_LEFT_UPPER);
-  ObjectSetInteger(0, "profitCount", OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
-  ObjectSetText(
-  "profitCount",                       // object name
-  "Profit Count: " + string(profitCount),   
-  20,                                   // font size
-  "Times New Roman" ,                   // font name
-  clrOrange                              // text color
-  );
-
+    tardeStat = 1 ;
+  }
   
 
+  addObjects("AccountBalance", string(AccountBalance()), yPosition, clrYellow, fontSize);
+
+  yPosition += yStep; 
+  
+  addObjects("AccountCredit", string(AccountCredit()), yPosition, clrRed, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountEquity", string(AccountEquity()), yPosition, clrPeachPuff, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountFreeMargin", string(AccountFreeMargin()), yPosition, clrCoral, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountFreeMarginMode", string(AccountFreeMarginMode()), yPosition, clrGreenYellow, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountMargin", string(AccountMargin()), yPosition, clrLightSkyBlue, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountLeverage", string(AccountLeverage()), yPosition, clrMistyRose, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("AccountProfit", string(AccountProfit()), yPosition, clrLavender, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("LOT PIP PROFIT", string(lotPipProfit), yPosition, clrYellow, fontSize);
+
+  yPosition += yStep;
+
+  addObjects("profitCount", string(profitCount), yPosition, clrOrange, fontSize);
+
+  yPosition += yStep;
 
 
 
 
+}
 
+
+void addObjects(string name, string value ,int yPosition , color colorname , int fontSize ){
+  ObjectDelete(0,name);
+  ObjectCreate(name, OBJ_LABEL, 0, 0, 0);// Creating obj.
+  ObjectSet(name, OBJPROP_CORNER, 1);    // Reference corner
+  ObjectSet(name, OBJPROP_XDISTANCE, 10);// X coordinate
+  ObjectSet(name, OBJPROP_YDISTANCE, yPosition);// Y coordinate
+  ObjectSetInteger(0, name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+  ObjectSetInteger(0, name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
+  ObjectSetText(
+  name,                       // object name
+  name +": " + value,   
+  fontSize,                                   // font size
+  "Times New Roman" ,                   // font name
+  colorname                              // text color
+  );
 }
