@@ -16,6 +16,10 @@ input int period2 = 51;
 input int period3 = 101;
 input int period4 = 201;
 input int period5 = 301;
+input int magicnumber = 1;
+
+input double lotPipProfit = 0;
+input int profitCount = 0;
 
 double vbid    = MarketInfo( Symbol(),MODE_BID);
 double vask    = MarketInfo( Symbol(),MODE_ASK);
@@ -78,6 +82,58 @@ void OnTick()
     ObjectSetInteger(0,uniqueTime + string(i),OBJPROP_WIDTH,2);
     ObjectSetInteger(0,uniqueTime + string(i),OBJPROP_COLOR,colorrr[i]);
   }
+  int ticket=OrderSend(
+                        Symbol(),         // string   symbol,              // symbol
+                        OP_BUY,           // int      cmd,                 // operation
+                        0.01,                // double   volume,              // volume
+                        Ask,              // double   price,               // price
+                        0,                // int      slippage,            // slippage
+                        0,                // double   stoploss,            // stop loss
+                        0,                // double   takeprofit,          // take profit
+                        "My order",       // string   comment=NULL,        // comment
+                        magicnumber,      // int      magic=0,             // magic number
+                        0,                // datetime expiration=0,        // pending order expiration
+                        clrGreen          // color    arrow_color=clrNONE  // color
+                        );
+
+
+
+
+  ObjectDelete(0,"lotPipProfit");
+  ObjectCreate("lotPipProfit", OBJ_LABEL, 0, 0, 0);// Creating obj.
+  ObjectSet("lotPipProfit", OBJPROP_CORNER, 1);    // Reference corner
+  ObjectSet("lotPipProfit", OBJPROP_XDISTANCE, 10);// X coordinate
+  ObjectSet("lotPipProfit", OBJPROP_YDISTANCE, 15);// Y coordinate
+  ObjectSetInteger(0, "lotPipProfit", OBJPROP_CORNER, CORNER_LEFT_UPPER);
+  ObjectSetInteger(0, "lotPipProfit", OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
+  ObjectSetText(
+  "lotPipProfit",                       // object name
+  "LOT PIP PROFIT: " + string(lotPipProfit),   
+  20,                                   // font size
+  "Times New Roman" ,                   // font name
+  clrYellow                              // text color
+  );
+
+  ObjectDelete(0,"profitCount");
+  ObjectCreate("profitCount", OBJ_LABEL, 0, 0, 0);// Creating obj.
+  ObjectSet("profitCount", OBJPROP_CORNER, 1);    // Reference corner
+  ObjectSet("profitCount", OBJPROP_XDISTANCE, 10);// X coordinate
+  ObjectSet("profitCount", OBJPROP_YDISTANCE, 40);// Y coordinate
+  ObjectSetInteger(0, "profitCount", OBJPROP_CORNER, CORNER_LEFT_UPPER);
+  ObjectSetInteger(0, "profitCount", OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
+  ObjectSetText(
+  "profitCount",                       // object name
+  "Profit Count: " + string(profitCount),   
+  20,                                   // font size
+  "Times New Roman" ,                   // font name
+  clrOrange                              // text color
+  );
+
   
-  Print(  uniqueTime);
+
+
+
+
+
+
 }
