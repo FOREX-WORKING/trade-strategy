@@ -1,8 +1,8 @@
 <chart>
-id=132658781084321132
+id=132658796283039137
 symbol=EURUSD
 period=60
-leftpos=9812
+leftpos=1471
 digits=5
 scale=2
 graph=1
@@ -19,10 +19,10 @@ days=1
 descriptions=1
 shift_size=28
 fixed_pos=0
-window_left=26
-window_top=26
-window_right=1502
-window_bottom=519
+window_left=78
+window_top=78
+window_right=1554
+window_bottom=550
 window_type=3
 background_color=15649542
 foreground_color=0
@@ -44,9 +44,9 @@ name=main
 </indicator>
 <indicator>
 name=Moving Average
-period=200
+period=100
 shift=0
-method=1
+method=3
 apply=6
 color=16777215
 style=0
@@ -62,7 +62,7 @@ flags=275
 window_num=0
 <inputs>
 TimeFrame=0
-VCrushAMP=50
+VCrushAMP=25
 ChannelDeviation=0.0
 alertsOn=true
 alertsOnCurrent=false
@@ -112,18 +112,17 @@ show_data=1
 <indicator>
 name=Custom Indicator
 <expert>
-name=ZigZag
+name=Jason-Indicator\RunMedian
 flags=275
 window_num=0
 <inputs>
-InpDepth=50
-InpDeviation=5
-InpBackstep=3
+period=40
+comment=period must be odd - or +1 will be added
 </inputs>
 </expert>
 shift_0=0
-draw_0=1
-color_0=255
+draw_0=0
+color_0=16777215
 style_0=0
 weight_0=0
 period_flags=0
