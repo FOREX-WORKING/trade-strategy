@@ -17,3 +17,7 @@ Indicators/median/median-1.ex4
 Indicators/median/RunMedian-jason.ex4
 Indicators/median/RunMedian.ex4
 Indicators/FPH_HistoBars.ex4
+templates/OptimizationReport.htm
+templates/Statement.htm
+templates/StrategyTester.htm
+templates/StatementDetailed.htm
