@@ -11,13 +11,13 @@
 #property indicator_color7 DarkGreen
 #property indicator_color8 Red
 //--------------------------------------------------------------------
-extern int SR = 3;       // =3..4
-extern int SRZZ = 12;    // =4..12..20
-extern int MainRZZ = 20; // =12..20..54...
-extern int FP = 21;
-extern int SMF = 3; // =1..5
-extern bool DrawZZ = false;
-extern int PriceConst = 0; // 0 - Close
+int SR = 3;       // =3..4
+int SRZZ = 12;    // =4..12..20
+int MainRZZ = 20; // =12..20..54...
+int FP = 21;
+int SMF = 3; // =1..5
+bool DrawZZ = false;
+int PriceConst = 0; // 0 - Close
                            // 1 - Open
                            // 2 - High
                            // 3 - Low
