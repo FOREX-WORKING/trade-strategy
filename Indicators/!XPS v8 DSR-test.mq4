@@ -2,7 +2,7 @@
 // +------------------------------------------------------------------------------------------+ //
 // |    .-._______                           XARD777                            _______.-.    | //
 // |---( )_)______)                 Knowledge of the ancients                  (______(_( )---| //
-// |  (    ()___)                              \¦/                               (___()    )  | //
+// |  (    ()___)                              \ï¿½/                               (___()    )  | //
 // |       ()__)                              (o o)                               (__()       | //
 // |--(___()_)__________________________oOOo___(_)___oOOo___________________________(_()___)--| //
 // |______|______|______|______|______|______|______|______|______|______|______|______|______| //
@@ -48,7 +48,7 @@ string gsa_88[10];
 string gsa_92[10];
 int gi_96;
 //extern string Custom_Indicator = "Dynamic Support/Resistance";
-//extern string Copyright = "© 2008, Dean Malone";
+//extern string Copyright = "ï¿½ 2008, Dean Malone";
 //extern string Web_Address = "www.compassfx.com";
 //extern string label = "--Login Information--";
 //extern string EMail = "";
@@ -308,11 +308,6 @@ int start() {
  //  if (Copyright != "98w34988suesdfe" && !gi_184) {
       gi_184 = TRUE;
       gs_176 = "Synergy_DSR";
-  //    if (checkFilename() == -1) {
-      //   gi_172 = TRUE;
-     //    Alert("Filename has been changed -- Indicator haulting");
-     //    return (-1);
-     // }
   // }
  //  if (Copyright == "98w34988suesdfe") {
       gda_152[0] = 14325.112;

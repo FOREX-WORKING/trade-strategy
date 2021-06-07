@@ -3,7 +3,7 @@
    Website: http://purebeam.biz
    E-mail : purebeam@gmail.com
 */
-#property copyright "Copyright © 2008, Dean Malone"
+#property copyright "Copyright ï¿½ 2008, Dean Malone"
 #property link      "www.compassfx.com"
 
 #property indicator_chart_window
@@ -22,7 +22,7 @@ string gsa_88[10];
 string gsa_92[10];
 int gi_96;
 extern string Custom_Indicator = "Synergy Trade Signal";
-extern string Copyright = "© 2008, Dean Malone";
+extern string Copyright = "ï¿½ 2008, Dean Malone";
 extern string Web_Address = "www.compassfx.com";
 extern string label = "--Login Information--";
 extern string EMail = "";
@@ -335,11 +335,6 @@ int start() {
    if (Copyright != "98w34988suesdfe" && !gi_568) {
       gi_568 = TRUE;
       gs_580 = "Synergy_TradeSignal";
-      if (checkFilename() == -1) {
-         gi_576 = TRUE;
-         Alert("Filename has been changed -- Indicator haulting");
-         return (-1);
-      }
    }
  /*  if (!gi_576) {
       if (GlobalVariableCheck("aSyn")) {

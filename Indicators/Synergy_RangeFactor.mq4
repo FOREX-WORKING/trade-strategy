@@ -3,7 +3,7 @@
    Website: http://purebeam.biz
    E-mail : purebeam@gmail.com
 */
-#property copyright "Copyright © 2008, Dean Malone"
+#property copyright "Copyright ï¿½ 2008, Dean Malone"
 #property link      "www.compassfx.com"
 
 #property indicator_separate_window
@@ -28,7 +28,7 @@ string gsa_88[10];
 string gsa_92[10];
 int gi_96;
 extern string Custom_Indicator = "Range_Factor";
-extern string Copyright = "© 2008, Dean Malone";
+extern string Copyright = "ï¿½ 2008, Dean Malone";
 extern string Web_Address = "www.compassfx.com";
 extern string label = "--Login Information--";
 extern string EMail = "";
@@ -322,11 +322,6 @@ int start() {
    if (Copyright != "98w34988suesdfe" && !gi_224) {
       gi_224 = TRUE;
       gs_216 = "Synergy_RangeFactor";
-      if (checkFilename() == -1) {
-         gi_212 = TRUE;
-         Alert("Filename has been changed -- Indicator haulting");
-         return (-1);
-      }
    }
    
    if (!gi_212) {
