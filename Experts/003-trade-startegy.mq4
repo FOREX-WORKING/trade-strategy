@@ -20,6 +20,13 @@ int respectPip = InitialRespectPip;
 extern double firstLotSize = 0.01;
 double orderLotSize = firstLotSize;
 
+
+input double lossLotPoint = 0.0;
+input int numberOfLostOrder = 0;
+
+int numberOfOpenTrade = 0;
+int arrayOfTrade[500];
+
 #include "Jason-Include/trade-strategy/functions.mq4"
 #include "Jason-Include/trade-strategy/checkForHistoryAndTrading.mq4"
 
@@ -51,12 +58,10 @@ int    Indicator02_03_candleNumber = 0;
 #include "Jason-Include/trade-strategy/findTrend.mq4"
 
 
-int numberOfOpenTrade = 0;
-int arrayOfTrade[500];
+
 #include "Jason-Include/trade-strategy/OrdersAsistance.mq4"
 
 
-input double lossLotPoint = 0.0;
 #include "Jason-Include/trade-strategy/trader.mq4"
  
 void OnTick()
