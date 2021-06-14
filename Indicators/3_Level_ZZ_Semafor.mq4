@@ -4,8 +4,8 @@
 #property copyright "asystem2000" 
 #property link      "asystem2000@yandex.ru" 
 
-// В основу расчета зигзага взят алгоритм klot@mail.ru
-// За что ему огромное спасибо
+// пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ klot@mail.ru
+// пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 #property indicator_chart_window 
 #property indicator_buffers 6
@@ -17,15 +17,15 @@
 #property indicator_color6 Yellow
 
 //---- input parameters 
-extern double Period1=5; 
-extern double Period2=13; 
-extern double Period3=34; 
-extern string   Dev_Step_1="1,3";
-extern string   Dev_Step_2="8,5";
-extern string   Dev_Step_3="21,12";
-extern int Symbol_1_Kod=140;
-extern int Symbol_2_Kod=141;
-extern int Symbol_3_Kod=142;
+double Period1=5; 
+double Period2=13; 
+double Period3=34; 
+string   Dev_Step_1="1,3";
+string   Dev_Step_2="8,5";
+string   Dev_Step_3="21,12";
+int Symbol_1_Kod=140;
+int Symbol_2_Kod=141;
+int Symbol_3_Kod=142;
 
 //---- buffers 
 double FP_BuferUp[];
@@ -50,12 +50,12 @@ int Stp3;
 //+------------------------------------------------------------------+ 
 int init() 
   { 
-// --------- Корректируем периоды для построения ЗигЗагов
+// --------- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
    if (Period1>0) F_Period=MathCeil(Period1*Period()); else F_Period=0; 
    if (Period2>0) N_Period=MathCeil(Period2*Period()); else N_Period=0; 
    if (Period3>0) H_Period=MathCeil(Period3*Period()); else H_Period=0; 
    
-//---- Обрабатываем 1 буфер 
+//---- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅ 
    if (Period1>0)
    {
    SetIndexStyle(0,DRAW_ARROW,0,1); 
@@ -69,7 +69,7 @@ int init()
    SetIndexEmptyValue(1,0.0); 
    }
    
-//---- Обрабатываем 2 буфер 
+//---- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅ 
    if (Period2>0)
    {
    SetIndexStyle(2,DRAW_ARROW,0,2); 
@@ -82,7 +82,7 @@ int init()
    SetIndexBuffer(3,NP_BuferDn); 
    SetIndexEmptyValue(3,0.0); 
    }
-//---- Обрабатываем 3 буфер 
+//---- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3 пїЅпїЅпїЅпїЅпїЅ 
    if (Period3>0)
    {
    SetIndexStyle(4,DRAW_ARROW,0,4); 
@@ -95,7 +95,7 @@ int init()
    SetIndexBuffer(5,HP_BuferDn); 
    SetIndexEmptyValue(5,0.0); 
    }
-// Обрабатываем значения девиаций и шагов
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
    int CDev=0;
    int CSt=0;
    int Mass[]; 
@@ -142,13 +142,13 @@ int start()
    return(0); 
   } 
 //+------------------------------------------------------------------+ 
-// дополнительные функции
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //int Take
 
 
 
 //+------------------------------------------------------------------+ 
-//| Функц формирования ЗигЗага                        | 
+//| пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ                        | 
 //+------------------------------------------------------------------+  
 int CountZZ( double& ExtMapBuffer[], double& ExtMapBuffer2[], int ExtDepth, int ExtDeviation, int ExtBackstep )
   {

@@ -1,6 +1,6 @@
 void readIndicator02()
 {
-    int counter_Indicator02 = 1;
+    int counter_Indicator02 = 0;
     int findValue__Indicator02 = 0;
     while (findValue__Indicator02 == 0 && counter_Indicator02 < 1000)
     {

@@ -9,12 +9,3 @@ void readIndicator01()
     // Print("Indicator01Resistance0: " + Indicator01Resistance0 );
 }
 
-double indicateVal01Reader (string indicatorName , int mode,int  shift) {
-    return iCustom(
-        Symbol(),
-        Period(),
-        indicatorName,
-        mode,//mode
-        shift//shift
-    );
-}

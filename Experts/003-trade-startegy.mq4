@@ -7,17 +7,24 @@
 #property link "http://www.mql4.com"
 #property description "Jason Jafari Expert"
 
-#define MAGICMA 20131111
-//--- Inputs
-input double Lots = 0.1;
-input double MaximumRisk = 0.02;
-input double DecreaseFactor = 3;
-input int MovingPeriod = 12;
-input int MovingShift = 6;
+input  int MAGIC_NU = 2121;
 
+
+extern int marketStatus = 0;
+
+
+extern int InitialRespectPip = 150;
+int respectPip = InitialRespectPip;
+
+
+extern double firstLotSize = 0.01;
+double orderLotSize = firstLotSize;
+
+#include "Jason-Include/trade-strategy/functions.mq4"
 #include "Jason-Include/trade-strategy/checkForHistoryAndTrading.mq4"
 
 
+#include "Jason-Include/trade-strategy/indicatorReader.mq4"
 //--- Indicaror1
 double Indicator01Resistance0;
 double Indicator01Resistance1;
@@ -41,6 +48,16 @@ int    Indicator02_03_candleNumber = 0;
 
 
 
+#include "Jason-Include/trade-strategy/findTrend.mq4"
+
+
+int numberOfOpenTrade = 0;
+int arrayOfTrade[500];
+#include "Jason-Include/trade-strategy/OrdersAsistance.mq4"
+
+
+input double lossLotPoint = 0.0;
+#include "Jason-Include/trade-strategy/trader.mq4"
  
 void OnTick()
 {
@@ -51,7 +68,11 @@ void OnTick()
 
     readIndicator01();
     readIndicator02();
-    // Print(Indicator01Support1);
+
+    findTrend();
+
+    OrdersAsistance();
+    trader();
         
  
 }
