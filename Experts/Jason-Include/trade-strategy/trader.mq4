@@ -1,12 +1,13 @@
+#include "orderHistory.mq4"
 #include "firstTrade.mq4"
-#include "poolTrade.mq4"
 
 void trader()
 {
 
+
    
+    orderHistory();
     firstTrade();
-    poolTrade();
 
     ObjectCreate("numberOfOpenTrade", OBJ_LABEL, 0, 0, 0);
     ObjectSet("numberOfOpenTrade", OBJPROP_CORNER, 1);

@@ -15,14 +15,15 @@ extern int marketStatus = 0;
 
 extern int InitialRespectPip = 150;
 int respectPip = InitialRespectPip;
+int stopPip =  NormalizeDouble((InitialRespectPip * 2 / 3), 0);
 
 
 extern double firstLotSize = 0.01;
 double orderLotSize = firstLotSize;
 
 
-input double lossLotPoint = 0.0;
-input int numberOfLostOrder = 0;
+extern double lossLotPoint = 0.0;
+extern int numberOfLostOrder = 0;
 
 int numberOfOpenTrade = 0;
 int arrayOfTrade[500];

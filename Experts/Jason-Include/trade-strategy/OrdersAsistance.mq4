@@ -21,14 +21,14 @@ void OrdersAsistance()
         arrayOfTrade[numberOfOpenTrade] = OrderTicket();
         numberOfOpenTrade += 1;
 
-        if (OrderType() == OP_BUY)
-        {
-            stopUpdatesssssss = OrderModify(OrderTicket(), OrderOpenPrice(), NormalizeDouble(Indicator01Support1, Digits), OrderTakeProfit(), OrderExpiration());
-        }
+        // if (OrderType() == OP_BUY)
+        // {
+        //     stopUpdatesssssss = OrderModify(OrderTicket(), OrderOpenPrice(), NormalizeDouble(Indicator01Support1, Digits), OrderTakeProfit(), OrderExpiration());
+        // }
 
-        if (OrderType() == OP_SELL)
-        {
-            stopUpdatesssssss = OrderModify(OrderTicket(), OrderOpenPrice(), NormalizeDouble(Indicator01Resistance1, Digits), OrderTakeProfit(), OrderExpiration());
-        }
+        // if (OrderType() == OP_SELL)
+        // {
+        //     stopUpdatesssssss = OrderModify(OrderTicket(), OrderOpenPrice(), NormalizeDouble(Indicator01Resistance1, Digits), OrderTakeProfit(), OrderExpiration());
+        // }
     }
 }

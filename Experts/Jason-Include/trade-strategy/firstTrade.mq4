@@ -2,7 +2,6 @@ void firstTrade()
 {
     if (
         numberOfOpenTrade == 0
-        && lossLotPoint == 0.0
     )
     {
 
@@ -13,7 +12,7 @@ void firstTrade()
                 OP_BUY,
                 orderLotSize,
                 Ask,
-                0,
+                NormalizeDouble(Bid - stopPip * Point, Digits),
                 NormalizeDouble(Ask + InitialRespectPip * Point, Digits),
                 Green
 
@@ -27,7 +26,7 @@ void firstTrade()
                 OP_SELL,
                 orderLotSize,
                 Bid,
-                0,
+                NormalizeDouble(Ask + stopPip * Point, Digits),
                 NormalizeDouble(Bid - InitialRespectPip * Point, Digits),
                 Red
 
