@@ -14,7 +14,6 @@ extern int marketStatus = 0;
 
 
 extern int InitialRespectPip = 150;
-int respectPip = InitialRespectPip;
 int stopPip =  NormalizeDouble((InitialRespectPip * 2 / 3), 0);
 
 
